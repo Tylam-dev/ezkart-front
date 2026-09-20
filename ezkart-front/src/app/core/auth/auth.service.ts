@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, Service, signal } from '@angular/core';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 import { Usuario } from './modelos/Usuario';
 import { catchError, finalize, Observable, of, shareReplay, tap } from 'rxjs';
 
@@ -12,8 +12,11 @@ export class AuthService {
 
     readonly usuario = signal<Usuario | null>(null);
 
-    login(nombreUsuario: string, contrasenia: string) {
-        return this.http.post(`${this.url}/login`, {nombreUsuario, contrasenia})
+    login(nombreUsuario: string, contrasena: string) {
+        return this.http.post<Usuario>(`${this.url}/login`, {
+            nombreUsuario: nombreUsuario, 
+            Contrasena: contrasena})
+        .pipe(tap(u => this.usuario.set(u)))
     }
 
     cargarSesion(): Observable<Usuario | null> {

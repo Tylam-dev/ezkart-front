@@ -1,0 +1,35 @@
+<div class="min-h-screen flex items-center justify-center p-4">
+  <mat-card class="w-full max-w-sm">
+    <mat-card-header>
+      <mat-card-title>Iniciar sesión</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="ingresar()" class="flex flex-col gap-2 pt-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input matInput formControlName="nombreUsuario"/>
+          @if (form.controls.nombreUsuario.hasError('required')) {
+            <mat-error>El usuario es obligatorio</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" formControlName="contrasena"/>
+          @if (form.controls.contrasena.hasError('required')) {
+            <mat-error>La contraseña es obligatoria</mat-error>
+          }
+        </mat-form-field>
+
+        @if (error()) {
+          <p class="text-red-600 text-sm">{{ error() }}</p>
+        }
+
+        <button mat-flat-button type="submit" [disabled]="form.invalid || cargando()">
+          {{ cargando() ? 'Ingresando...' : 'Ingresar' }}
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
