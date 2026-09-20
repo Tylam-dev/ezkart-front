@@ -1,0 +1,11 @@
+<mat-toolbar class="flex justify-between">
+  <span>{{ auth.usuario()?.nombre }}</span>
+
+  <button mat-icon-button routerLink="/cart" aria-label="Carrito">
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+</mat-toolbar>
+
+<main class="p-4">
+  <router-outlet />
+</main>
