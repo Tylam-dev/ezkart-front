@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpInterceptorFn } from '@angular/common/http';
-import { credencialesInterceptor } from './credenciales-interceptor';
+import { credencialesInterceptor } from './credenciales.interceptor';
 
 describe('credencialesInterceptor', () => {
   const interceptor: HttpInterceptorFn = (req, next) =>
