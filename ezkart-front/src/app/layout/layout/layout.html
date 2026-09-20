@@ -1,5 +1,11 @@
 <mat-toolbar class="flex justify-between">
-  <span>{{ auth.usuario()?.nombre }}</span>
+  <div class="flex items-center gap-2">
+    <button mat-icon-button (click)="cerrarSesion()" aria-label="Cerrar sesión">
+      <mat-icon>logout</mat-icon>
+    </button>
+
+    <span>{{ auth.usuario()?.nombre }}</span>
+  </div>
 
   <button mat-icon-button routerLink="/cart" aria-label="Carrito">
     <mat-icon>shopping_cart</mat-icon>
