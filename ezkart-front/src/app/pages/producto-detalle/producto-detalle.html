@@ -13,6 +13,32 @@
     <dt class="font-medium">Existencia</dt>
     <dd>{{ p.existencia }}</dd>
   </dl>
+
+  <form (submit)="$event.preventDefault(); agregar(p)" class="flex items-start gap-2 mt-6">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-32">
+      <mat-label>Cantidad</mat-label>
+      <input matInput type="number" min="1" [formControl]="cantidad" />
+    </mat-form-field>
+
+    <button
+      mat-flat-button
+      type="submit"
+      class="mt-1"
+      [disabled]="cantidad.invalid || agregando() || p.existencia === 0"
+    >
+      Agregar al carrito
+    </button>
+  </form>
+
+  @if (p.existencia === 0) {
+    <p class="text-red-600 text-sm mt-2">Producto agotado.</p>
+  }
+  @if (mensaje()) {
+    <p class="text-sm mt-2">{{ mensaje() }}</p>
+  }
+  @if (error()) {
+    <p class="text-red-600 text-sm mt-2">{{ error() }}</p>
+  }
 } @else if (noEncontrado()) {
   <p class="mt-4">Producto no encontrado.</p>
 }

@@ -7,10 +7,33 @@
     <span>{{ auth.usuario()?.nombre }}</span>
   </div>
 
-  <button mat-icon-button routerLink="/cart" aria-label="Carrito">
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menuCarrito"
+    (menuOpened)="cargarCarrito()"
+    aria-label="Carrito"
+  >
     <mat-icon>shopping_cart</mat-icon>
   </button>
 </mat-toolbar>
+
+<mat-menu #menuCarrito="matMenu">
+  <div class="px-4 py-2 min-w-64">
+    @for (item of carrito.carrito()?.items ?? []; track item.productoId) {
+      <div class="flex justify-between gap-4 py-1">
+        <span>
+          {{ item.nombre }}
+          @if (item.agotado) {
+            <span class="text-red-600 text-xs">(Agotado)</span>
+          }
+        </span>
+        <span>x{{ item.cantidad }}</span>
+      </div>
+    } @empty {
+      <p>El carrito está vacío.</p>
+    }
+  </div>
+</mat-menu>
 
 <main class="p-4">
   <router-outlet />
