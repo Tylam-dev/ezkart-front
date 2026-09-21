@@ -1,1 +1,17 @@
-<p>products works!</p>
+@if (datos(); as d) {
+  <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(220px,1fr))]">
+    @for (p of d.items; track p.id) {
+      <app-producto-card [producto]="p" />
+    } @empty {
+      <p>No hay productos.</p>
+    }
+  </div>
+
+  <mat-paginator
+    [length]="d.totalItems"
+    [pageSize]="d.tamanoPagina"
+    [pageIndex]="d.pagina - 1"
+    [pageSizeOptions]="[10, 20, 50]"
+    (page)="cambiarPagina($event)"
+  />
+}

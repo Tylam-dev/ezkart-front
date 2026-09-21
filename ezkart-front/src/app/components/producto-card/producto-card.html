@@ -1,0 +1,16 @@
+<mat-card appearance="outlined" class="h-full">
+  <mat-card-header>
+    <mat-card-title>{{ producto().nombre }}</mat-card-title>
+    <mat-card-subtitle>{{ producto().codigo }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="pt-4">
+    <p class="text-xl font-medium">{{ producto().precio | currency }}</p>
+
+    @if (producto().existencia > 0) {
+      <p class="text-sm">{{ producto().existencia }} disponibles</p>
+    } @else {
+      <p class="text-sm text-red-600">Agotado</p>
+    }
+  </mat-card-content>
+</mat-card>
