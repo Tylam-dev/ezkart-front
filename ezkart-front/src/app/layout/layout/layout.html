@@ -7,14 +7,20 @@
     <span>{{ auth.usuario()?.nombre }}</span>
   </div>
 
-  <button
-    mat-icon-button
-    [matMenuTriggerFor]="menuCarrito"
-    (menuOpened)="cargarCarrito()"
-    aria-label="Carrito"
-  >
-    <mat-icon>shopping_cart</mat-icon>
-  </button>
+  <div class="flex items-center gap-2">
+    <button mat-icon-button routerLink="/orders" aria-label="Mis órdenes">
+      <mat-icon>receipt_long</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menuCarrito"
+      (menuOpened)="cargarCarrito()"
+      aria-label="Carrito"
+    >
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
 
 <mat-menu #menuCarrito="matMenu">
@@ -41,6 +47,15 @@
     } @empty {
       <p>El carrito está vacío.</p>
     }
+
+    <button
+      mat-flat-button
+      routerLink="/checkout"
+      class="w-full mt-2"
+      [disabled]="!carrito.carrito()?.items?.length"
+    >
+      Ir a comprar
+    </button>
   </div>
 </mat-menu>
 
