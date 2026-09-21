@@ -22,6 +22,10 @@ export class Layout {
     this.carrito.cargar().subscribe();
   }
 
+  eliminarDelCarrito(productoId: string) {
+    this.carrito.eliminar(productoId).subscribe({ error: () => this.cargarCarrito() });
+  }
+
   cerrarSesion() {
     this.auth.logout().subscribe(() => {
       this.carrito.limpiar();

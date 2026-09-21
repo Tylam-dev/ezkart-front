@@ -21,6 +21,16 @@ export class CarritoService {
       .pipe(tap((c) => this.carrito.set(c)));
   }
 
+  eliminar(productoId: string) {
+    return this.http.delete<void>(`${this.url}/items/${productoId}`).pipe(
+      tap(() =>
+        this.carrito.update((c) =>
+          c && { ...c, items: c.items.filter((i) => i.productoId !== productoId) },
+        ),
+      ),
+    );
+  }
+
   limpiar() {
     this.carrito.set(null);
   }

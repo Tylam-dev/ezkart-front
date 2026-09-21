@@ -20,14 +20,23 @@
 <mat-menu #menuCarrito="matMenu">
   <div class="px-4 py-2 min-w-64">
     @for (item of carrito.carrito()?.items ?? []; track item.productoId) {
-      <div class="flex justify-between gap-4 py-1">
+      <div class="flex items-center justify-between gap-4 py-1">
         <span>
           {{ item.nombre }}
           @if (item.agotado) {
             <span class="text-red-600 text-xs">(Agotado)</span>
           }
         </span>
-        <span>x{{ item.cantidad }}</span>
+        <span class="flex items-center">
+          x{{ item.cantidad }}
+          <button
+            mat-icon-button
+            (click)="$event.stopPropagation(); eliminarDelCarrito(item.productoId)"
+            aria-label="Quitar del carrito"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </span>
       </div>
     } @empty {
       <p>El carrito está vacío.</p>
