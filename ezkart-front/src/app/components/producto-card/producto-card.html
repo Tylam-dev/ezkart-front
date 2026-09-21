@@ -1,4 +1,8 @@
-<mat-card appearance="outlined" class="h-full">
+<mat-card
+  appearance="outlined"
+  class="h-full cursor-pointer"
+  [routerLink]="['/products', producto().id]"
+>
   <mat-card-header>
     <mat-card-title>{{ producto().nombre }}</mat-card-title>
     <mat-card-subtitle>{{ producto().codigo }}</mat-card-subtitle>

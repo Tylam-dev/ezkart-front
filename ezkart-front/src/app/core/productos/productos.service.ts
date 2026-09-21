@@ -14,4 +14,8 @@ export class ProductosService {
 
     return this.http.get<Paginacion<Producto>>(this.url, { params });
   }
+
+  obtenerPorId(id: string) {
+    return this.http.get<Producto>(`${this.url}/${id}`);
+  }
 }
